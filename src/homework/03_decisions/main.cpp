@@ -1,6 +1,7 @@
 //write include statements
 
 #include "decisions.h"
+
 using std:cout; using std::cin; using std::string;
 
 
@@ -48,7 +49,7 @@ int main()
 	}
 	else if (menu_option == 3)
 	{
-		cout<<"Exiting the section...\n\n";
+		cout<<"Exiting the section...\n";
 	}
 	else
 	{
