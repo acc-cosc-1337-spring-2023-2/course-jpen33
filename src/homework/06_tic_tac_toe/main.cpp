@@ -1,38 +1,61 @@
 #include "tic_tac_toe.h"
 
-using std::cout; using std::cin;
-
 int main() 
 {
-	TicTacToe game;
-	string playerStart;
-	int position;
-	auto anotherGame = 'y';
+	TicTacToe game; 
 
-	do
-	{
-		cout<<"Enter X or O: ";
-		
-		cin>>playerStart;
+    auto prompt = 'Y';
 
-		game.start_game(playerStart);
+    while (prompt == 'Y' || prompt == 'y')
+    {
+        string first_player;
+        int position;
+        while(true)
+        {
+            cout<<"Enter X or O: ";
+            cin>>first_player;
+           
+            if(first_player == "X" || first_player == "O")
+            {
+                break;
+            }
+            else
+            {
+                cout<<"This is an invaild input. Please enter X or O to continue.\n";
+            }
+        game.start_game(first_player);
+        while(game.game_over() == false)
+        {   
+            while(true)
+            {
+                cout<<"Enter position from 1 to 9: ";
+                cin>>position;
+                if(position >= 1 && position <=9)
+                {
+                    break;
+                }
+                else
+                {
+                    cout<<"This is a invalid input. Please enter a number from 1 to 9. \n";
+                }
+            }
+            game.mark_board(position);
+            game.display_board(); 
+        }
+        cout<<"Game over\n"<<"The winner is "<<game.get_winner()<<".\n";
 
-		while (!game.game_over())
-		{
-			cout<<"Enter position from 1 to 9: ";
-			cin>>position;
-			game.mark_board(position);
-			game.display_board();
-		}
-
-		cout<<"\nGame over~\n";
-
-		cout<<"\nGo again? Enter Y for yes,or N for no: ";
-		
-		cin>>anotherGame;
-
-		game.start_game(playerStart);
-	}
-	while (anotherGame == 'y');
-
+        while (true)
+        {
+            cout<<"Play a new game? (Y/N) ";
+            cin>>prompt;
+        
+            if (prompt == 'n' || prompt == 'N' || prompt == 'y' || prompt == 'Y')
+            {
+                break;
+            }
+            else{cout<<"This is a invalid input. Please enter the following: Y or N\n";}
+        }
+    }
 	return 0;
+}
+
