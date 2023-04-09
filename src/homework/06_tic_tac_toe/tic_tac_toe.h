@@ -1,8 +1,9 @@
 //h
-#include<iostream>
-#include<string>
-#include<vector>
+#include <iostream>
+#include <string>
+#include <vector>
 
+using std::istream; using std::ostream;
 using std::cout; using std::cin;
 using std::string; using std::vector;
 
@@ -36,9 +37,13 @@ private:
     void set_winner();
     string player;
    
+    friend std::ostream& operator<<(std::ostream& out, const TicTacToe& game);
+   
+    friend std::istream& operator>>(std::istream& in, TicTacToe& game);
 
 };
 
 #endif
 //part One!
 //part two done!
+//part 3 done//
