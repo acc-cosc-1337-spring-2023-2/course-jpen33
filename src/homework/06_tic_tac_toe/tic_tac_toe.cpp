@@ -142,4 +142,39 @@ void TicTacToe::set_winner()
     {
         winner = "X";
     }
+    
+   
+    
+   std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            out<<game.pegs[(i * 3) + j];
+            if (j < 2){out<<"|";}
+        }
+        if(i < 2){out<<"\n";}
+    }
+    out<<"\n";
+    return out;
+}
+std::istream& operator>>(std::istream& in, TicTacToe& game)
+{
+    int position;
+    while(true)
+    {
+        cout<<"Please enter the location from 1 to 9: ";
+        in>>position;
+        if(position >= 1 && position <=9)
+        {
+            break;
+        }
+        else
+        {
+            cout<<"This input is invalid please enter a number between 1-9.\n";
+        }
+    }
+    game.mark_board(position);
+    return in;
 }
