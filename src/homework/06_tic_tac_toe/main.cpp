@@ -56,6 +56,14 @@ int main()
             else{cout<<"This is a invalid input. Please enter the following: Y or N\n";}
         }
     }
-	return 0;
+	    
+	    cout<<"\n"<<manager<<"\n";
+	    manager.get_winner_total(o, x, t);
+
+        cout<<"O is the winner: "<<o<<"\n";
+        cout<<"X is the winner: "<<x<<"\n";
+        cout<<"X and O ties: "<<t<<"\n";
+	
+	    return 0;
 }
 
