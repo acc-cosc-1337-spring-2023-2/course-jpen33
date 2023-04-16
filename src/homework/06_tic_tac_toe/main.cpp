@@ -1,69 +1,73 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
+#include<memory>
+
+using std::cout; using std::cin; 
+using std::make_unique;
 
 int main() 
 {
-	TicTacToe game; 
+	unique_ptr<TicTacToe> game;
+	TicTacToeManager manager;
+	string playerStart;
+	auto anotherGame = 'y';
+	int x, o, t, size;
 
-    auto prompt = 'Y';
+	do
+	{
+		do
+		{
+			cout<<"Please choose a board size. 3 is for 3x3, 4 is for 4x4: ";
+        	cin>>size;
+		} 
+		while (size != 3 && size != 4);
+		
 
-    while (prompt == 'Y' || prompt == 'y')
-    {
-        string first_player;
-        int position;
-        while(true)
-        {
-            cout<<"Enter X or O: ";
-            cin>>first_player;
-           
-            if(first_player == "X" || first_player == "O")
-            {
-                break;
-            }
-            else
-            {
-                cout<<"This is an invaild input. Please enter X or O to continue.\n";
-            }
-        game.start_game(first_player);
-        while(game.game_over() == false)
-        {   
-            while(true)
-            {
-                cout<<"Enter position from 1 to 9: ";
-                cin>>position;
-                if(position >= 1 && position <=9)
-                {
-                    break;
-                }
-                else
-                {
-                    cout<<"This is a invalid input. Please enter a number from 1 to 9. \n";
-                }
-            }
-            game.mark_board(position);
-            game.display_board(); 
-        }
-        cout<<"Game over\n"<<"The winner is "<<game.get_winner()<<".\n";
+        if(size == 3)
+            game = make_unique<TicTacToe3>();
+        else if(size == 4)
+            game = make_unique<TicTacToe4>();
 
-        while (true)
-        {
-            cout<<"Play a new game? (Y/N) ";
-            cin>>prompt;
-        
-            if (prompt == 'n' || prompt == 'N' || prompt == 'y' || prompt == 'Y')
-            {
-                break;
-            }
-            else{cout<<"This is a invalid input. Please enter the following: Y or N\n";}
-        }
-    }
-	    
-	    cout<<"\n"<<manager<<"\n";
-	    manager.get_winner_total(o, x, t);
 
-        cout<<"O is the winner: "<<o<<"\n";
-        cout<<"X is the winner: "<<x<<"\n";
-        cout<<"X and O ties: "<<t<<"\n";
-	
-	    return 0;
+		
+		cout<<"Enter X or O to start: ";
+		cin>>playerStart;
+		cout<<"To exit,enter 0.\n";
+		
+
+
+		game->start_game(playerStart);
+
+		while(!game->game_over())
+		{
+			cin>>*game;
+			cout<<*game;
+		}
+		
+
+		cout<<"\nGame over. Winner is: "<<game->get_winner()<<"\n";
+		manager.save_game(game);
+		manager.get_winner_total(x, o, t);
+
+		cout<<"O wins: "<<x<<"\n";
+		cout<<"X wins: "<<o<<"\n";
+		cout<<"Ties: "<<t<<"\n";
+
+		cout<<"\nPlay again? Enter y for yes or n for no: ";
+		cin>>anotherGame;
+
+		
+		
+		
+		while(anotherGame != 'y' && anotherGame != 'n' && anotherGame != 'Y' && anotherGame && 'N')
+		{
+			cout<<"This is an invalid input. Please enter y or n: ";
+			cin>>anotherGame;
+		}
+	}
+	while (anotherGame == 'y' || anotherGame == 'Y');
+
+	return 0;
 }
-
