@@ -10,7 +10,8 @@ using std::make_unique;
 int main() 
 {
 	unique_ptr<TicTacToe> game;
-	TicTacToeManager manager;
+	TicTactoeData data;
+	TicTacToeManager manager(data);
 	string playerStart;
 	auto anotherGame = 'y';
 	int x, o, t, size;
@@ -32,7 +33,7 @@ int main()
 
 
 		
-		cout<<"Enter X or O to start: ";
+		cout<<"Please enter X or O to start: ";
 		cin>>playerStart;
 		cout<<"To exit,enter 0.\n";
 		
@@ -58,7 +59,6 @@ int main()
 		cout<<"\nPlay again? Enter y for yes or n for no: ";
 		cin>>anotherGame;
 
-		
 		
 		
 		while(anotherGame != 'y' && anotherGame != 'n' && anotherGame != 'Y' && anotherGame && 'N')
