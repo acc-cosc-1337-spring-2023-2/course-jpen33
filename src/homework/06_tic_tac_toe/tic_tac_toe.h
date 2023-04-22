@@ -18,11 +18,13 @@ friend istream& operator>>(istream& in, TicTacToe& game);
 
 public:
     TicTacToe(int size) : pegs(size*size, " "){};
+    TicTacToe(vector<string> p, string win) : pegs(p), winner(win){};
     bool game_over();
     void start_game(string first_player);
     void mark_board(int position);
     string get_player() const {return player;}
     string get_winner() const {return winner;}
+    vector<string> get_pegs() const {return pegs;}
 
 protected:
     vector<string> pegs;
@@ -33,8 +35,10 @@ protected:
 private:
     void set_next_player();
     bool check_board_full();
+    
     void clear_board();
     string player;
+   
     void set_winner();
     string winner;
 };
@@ -46,3 +50,4 @@ private:
 //part two done!
 //part 3 done//
 //part 4 fixing//
+//part5 //
